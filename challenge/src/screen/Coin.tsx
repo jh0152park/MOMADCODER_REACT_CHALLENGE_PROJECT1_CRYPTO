@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { Header, Loading, Title, Wrapper } from "./style/CoinsStyle";
-import { ICoinDetail, ICoinPrice, IRouteState } from "./types/CoinsType";
+import { IRouteState } from "./types/CoinsType";
 import axios from "axios";
+import { ICoinDetail, ICoinPrice } from "./types/CoinType";
+import { Board, Container, Information, SubItems } from "./style/CoinStyle";
 
 const COIN_DETAIL_URL = "https://api.coinpaprika.com/v1/coins/";
 const COIN_PRICE_URL = "https://api.coinpaprika.com/v1/tickers/";
@@ -32,15 +34,36 @@ function Coin() {
 
         getCoinDetail(coinId);
         getCoinPrice(coinId);
-    }, []);
-    //sudden attack!
+    }, [coinId]);
+
     return (
         <Wrapper>
             <Header>
                 <Title>{state?.name || "Not Exist"}</Title>
             </Header>
 
-            {loading ? <Loading>Loading...</Loading> : null}
+            {loading ? (
+                <Loading>Loading...</Loading>
+            ) : (
+                <Container>
+                    <Information>
+                        <Board>
+                            <SubItems>
+                                <p>RANK</p>
+                                <p>{detail?.rank}</p>
+                            </SubItems>
+                            <SubItems>
+                                <p>SYMBOL</p>
+                                <p>{detail?.symbol}</p>
+                            </SubItems>
+                            <SubItems>
+                                <p>TYPE</p>
+                                <p>{detail?.type}</p>
+                            </SubItems>
+                        </Board>
+                    </Information>
+                </Container>
+            )}
         </Wrapper>
     );
 }
