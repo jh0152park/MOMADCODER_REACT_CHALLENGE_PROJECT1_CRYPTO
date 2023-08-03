@@ -52,3 +52,17 @@ export const Loading = styled.span`
     font-size: 20px;
     display: block;
 `;
+
+export const Logo = styled.img`
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+`;
+
+export const CoinContainer = styled.div`
+    width: 280px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+`;
