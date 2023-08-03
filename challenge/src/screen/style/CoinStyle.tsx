@@ -40,3 +40,26 @@ export const Description = styled.p`
     box-sizing: border-box;
     overflow: hidden;
 `;
+
+export const Tabs = styled.div`
+    width: 100%;
+    margin: 40px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+export const Tab = styled.div`
+    padding: 10px 0px;
+    text-align: center;
+    background-color: ${(props) => props.theme.boardColor};
+    width: 45%;
+    border-radius: 10px;
+    a {
+        display: block;
+        &:hover {
+            color: ${(props) => props.theme.accentColor};
+            transition: color 0.2s ease-out;
+        }
+    }
+`;
