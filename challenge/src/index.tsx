@@ -2,6 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { createGlobalStyle } from "styled-components";
+import { ThemeProvider } from "styled-components";
+import { DarkMode } from "./Thema";
+import { RecoilRoot } from "recoil";
 
 const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -37,6 +40,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     line-height: 1;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: ${(props) => props.theme.backgroundColor};
+    color: ${(props) => props.theme.fontColor};
   }
   ol, ul {
     list-style: none;
@@ -64,7 +69,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <>
-        <GlobalStyle />
-        <App />
+        <RecoilRoot>
+            <ThemeProvider theme={DarkMode}>
+                <GlobalStyle />
+                <App />
+            </ThemeProvider>
+        </RecoilRoot>
     </>
 );
