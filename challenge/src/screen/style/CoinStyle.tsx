@@ -25,4 +25,19 @@ export const Board = styled.div`
     padding: 0px 20px;
 `;
 
-export const SubItems = styled.div``;
+export const SubItems = styled.div`
+    text-align: center;
+
+    p:first-child {
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+`;
+
+export const Description = styled.p`
+    width: 100%;
+    margin: 40px 0px;
+    box-sizing: border-box;
+    overflow: hidden;
+`;
