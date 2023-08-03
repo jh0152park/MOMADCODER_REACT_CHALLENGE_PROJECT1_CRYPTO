@@ -8,7 +8,6 @@ export const Container = styled.div`
 
 export const Information = styled.div`
     width: 700px;
-    height: 500px;
     overflow: hidden;
     box-sizing: border-box;
     /* background-color: whitesmoke; */
