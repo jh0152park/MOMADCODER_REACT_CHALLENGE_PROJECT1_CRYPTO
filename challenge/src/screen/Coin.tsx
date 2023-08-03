@@ -10,6 +10,8 @@ import {
     Description,
     Information,
     SubItems,
+    Tab,
+    Tabs,
 } from "./style/CoinStyle";
 import Price from "./Price";
 import Chart from "./Chart";
@@ -88,11 +90,16 @@ function Coin() {
                                     <p>{price?.total_supply}</p>
                                 </SubItems>
                             </Board>
+                            <Tabs>
+                                <Tab>
+                                    <Link to={`/${coinId}/Chart`}>Chart</Link>
+                                </Tab>
+                                <Tab>
+                                    <Link to={`/${coinId}/price`}>Price</Link>
+                                </Tab>
+                            </Tabs>
                         </Information>
                     </Container>
-
-                    <Link to={`/${coinId}/Chart`}>Chart</Link>
-                    <Link to={`/${coinId}/price`}>Price</Link>
 
                     <Switch>
                         <Route path={`/${coinId}/chart`}>
