@@ -11,3 +11,5 @@ export interface ICoin {
 export interface IRouteState {
     name: string;
 }
+
+export interface ICoinDetail {}
