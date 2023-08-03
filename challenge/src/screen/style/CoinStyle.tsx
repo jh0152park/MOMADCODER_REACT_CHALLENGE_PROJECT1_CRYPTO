@@ -49,16 +49,18 @@ export const Tabs = styled.div`
     align-items: center;
 `;
 
-export const Tab = styled.div`
+export const Tab = styled.div<{ isActive: boolean }>`
     padding: 10px 0px;
     text-align: center;
-    background-color: ${(props) => props.theme.boardColor};
+    /* background-color: ${(props) => props.theme.boardColor}; */
+    background-color: ${(props) =>
+        props.isActive ? props.theme.accentColor : props.theme.boardColor};
     width: 45%;
     border-radius: 10px;
     a {
         display: block;
         &:hover {
-            color: ${(props) => props.theme.accentColor};
+            color: ${(props) => props.theme.backgroundColor};
             transition: color 0.2s ease-out;
         }
     }
