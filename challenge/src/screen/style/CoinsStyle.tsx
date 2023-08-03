@@ -11,6 +11,7 @@ export const Header = styled.header`
     justify-content: center;
     font-size: 50px;
     font-weight: bold;
+    margin-bottom: 20px;
 `;
 
 export const CoinList = styled.ul`

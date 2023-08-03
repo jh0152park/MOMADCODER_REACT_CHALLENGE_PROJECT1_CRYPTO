@@ -4,7 +4,13 @@ import { Header, Loading, Title, Wrapper } from "./style/CoinsStyle";
 import { IRouteState } from "./types/CoinsType";
 import axios from "axios";
 import { ICoinDetail, ICoinPrice } from "./types/CoinType";
-import { Board, Container, Information, SubItems } from "./style/CoinStyle";
+import {
+    Board,
+    Container,
+    Description,
+    Information,
+    SubItems,
+} from "./style/CoinStyle";
 
 const COIN_DETAIL_URL = "https://api.coinpaprika.com/v1/coins/";
 const COIN_PRICE_URL = "https://api.coinpaprika.com/v1/tickers/";
@@ -59,6 +65,21 @@ function Coin() {
                             <SubItems>
                                 <p>TYPE</p>
                                 <p>{detail?.type}</p>
+                            </SubItems>
+                        </Board>
+                        <Description>{detail?.description}</Description>
+                        <Board>
+                            <SubItems>
+                                <p>MAX SUPPLY</p>
+                                <p>{price?.max_supply}</p>
+                            </SubItems>
+                            <SubItems>
+                                <p>CIRCULATING SUPPLY</p>
+                                <p>{price?.circulating_supply}</p>
+                            </SubItems>
+                            <SubItems>
+                                <p>TOTAL SUPPLY</p>
+                                <p>{price?.total_supply}</p>
                             </SubItems>
                         </Board>
                     </Information>
