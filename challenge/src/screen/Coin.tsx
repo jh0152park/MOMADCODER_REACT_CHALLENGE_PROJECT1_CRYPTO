@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { Header, Loading, Title, Wrapper } from "./style/CoinsStyle";
-import { IRouteState } from "./types/CoinsType";
+import { ICoinDetail, ICoinPrice, IRouteState } from "./types/CoinsType";
 import axios from "axios";
 
 const COIN_DETAIL_URL = "https://api.coinpaprika.com/v1/coins/";
@@ -12,18 +12,16 @@ function Coin() {
     const { state } = useLocation<IRouteState>();
 
     const [loading, setLoading] = useState(true);
-    const [detail, setDetail] = useState({});
-    const [price, setPrice] = useState({});
+    const [detail, setDetail] = useState<ICoinDetail>();
+    const [price, setPrice] = useState<ICoinPrice>();
 
     async function getCoinDetail(coinId: string) {
         const response = await axios.get(COIN_DETAIL_URL + coinId);
-        console.log(response.data);
         setDetail(response.data);
     }
 
     async function getCoinPrice(coinId: string) {
         const response = await axios.get(COIN_PRICE_URL + coinId);
-        console.log(response.data);
         setPrice(response.data);
     }
 
