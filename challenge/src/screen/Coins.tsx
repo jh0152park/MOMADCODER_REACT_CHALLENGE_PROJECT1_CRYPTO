@@ -55,7 +55,7 @@ function Coins() {
                                     <Logo
                                         src={`${LOGO_URL}${coin.symbol.toLowerCase()}`}
                                     ></Logo>
-                                    {coin.name} ➡
+                                    {coin.name}
                                 </CoinContainer>
                             </Link>
                         </Coin>

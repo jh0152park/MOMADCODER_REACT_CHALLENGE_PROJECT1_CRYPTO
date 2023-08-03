@@ -5,6 +5,7 @@ import { createGlobalStyle } from "styled-components";
 import { ThemeProvider } from "styled-components";
 import { DarkMode, LightMode } from "./Thema";
 import { RecoilRoot } from "recoil";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -67,16 +68,20 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const queryClient = new QueryClient();
+
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );
 root.render(
     <>
         <RecoilRoot>
-            <ThemeProvider theme={DarkMode}>
-                <GlobalStyle />
-                <App />
-            </ThemeProvider>
+            <QueryClientProvider client={queryClient}>
+                <ThemeProvider theme={DarkMode}>
+                    <GlobalStyle />
+                    <App />
+                </ThemeProvider>
+            </QueryClientProvider>
         </RecoilRoot>
     </>
 );
