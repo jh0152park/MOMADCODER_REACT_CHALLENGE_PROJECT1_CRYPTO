@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Route, Switch, useLocation, useParams } from "react-router-dom";
 import { Header, Loading, Title, Wrapper } from "./style/CoinsStyle";
 import { IRouteState } from "./types/CoinsType";
 import axios from "axios";
@@ -11,6 +11,8 @@ import {
     Information,
     SubItems,
 } from "./style/CoinStyle";
+import Price from "./Price";
+import Chart from "./Chart";
 
 const COIN_DETAIL_URL = "https://api.coinpaprika.com/v1/coins/";
 const COIN_PRICE_URL = "https://api.coinpaprika.com/v1/tickers/";
@@ -34,56 +36,70 @@ function Coin() {
     }
 
     useEffect(() => {
-        if (state) {
-            setLoading(false);
-        }
-
         getCoinDetail(coinId);
         getCoinPrice(coinId);
+        setLoading(false);
     }, [coinId]);
 
     return (
         <Wrapper>
             <Header>
-                <Title>{state?.name || "Not Exist"}</Title>
+                <Title>
+                    {state?.name
+                        ? state?.name
+                        : loading
+                        ? "Loading..."
+                        : detail?.name}
+                </Title>
             </Header>
 
             {loading ? (
                 <Loading>Loading...</Loading>
             ) : (
-                <Container>
-                    <Information>
-                        <Board>
-                            <SubItems>
-                                <p>RANK</p>
-                                <p>{detail?.rank}</p>
-                            </SubItems>
-                            <SubItems>
-                                <p>SYMBOL</p>
-                                <p>{detail?.symbol}</p>
-                            </SubItems>
-                            <SubItems>
-                                <p>TYPE</p>
-                                <p>{detail?.type}</p>
-                            </SubItems>
-                        </Board>
-                        <Description>{detail?.description}</Description>
-                        <Board>
-                            <SubItems>
-                                <p>MAX SUPPLY</p>
-                                <p>{price?.max_supply}</p>
-                            </SubItems>
-                            <SubItems>
-                                <p>CIRCULATING SUPPLY</p>
-                                <p>{price?.circulating_supply}</p>
-                            </SubItems>
-                            <SubItems>
-                                <p>TOTAL SUPPLY</p>
-                                <p>{price?.total_supply}</p>
-                            </SubItems>
-                        </Board>
-                    </Information>
-                </Container>
+                <>
+                    <Container>
+                        <Information>
+                            <Board>
+                                <SubItems>
+                                    <p>RANK</p>
+                                    <p>{detail?.rank}</p>
+                                </SubItems>
+                                <SubItems>
+                                    <p>SYMBOL</p>
+                                    <p>{detail?.symbol}</p>
+                                </SubItems>
+                                <SubItems>
+                                    <p>TYPE</p>
+                                    <p>{detail?.type}</p>
+                                </SubItems>
+                            </Board>
+                            <Description>{detail?.description}</Description>
+                            <Board>
+                                <SubItems>
+                                    <p>MAX SUPPLY</p>
+                                    <p>{price?.max_supply}</p>
+                                </SubItems>
+                                <SubItems>
+                                    <p>CIRCULATING SUPPLY</p>
+                                    <p>{price?.circulating_supply}</p>
+                                </SubItems>
+                                <SubItems>
+                                    <p>TOTAL SUPPLY</p>
+                                    <p>{price?.total_supply}</p>
+                                </SubItems>
+                            </Board>
+                        </Information>
+                    </Container>
+
+                    <Switch>
+                        <Route path={`/${coinId}/price`}>
+                            <Price></Price>
+                        </Route>
+                        <Route path={`/${coinId}/chart`}>
+                            <Chart></Chart>
+                        </Route>
+                    </Switch>
+                </>
             )}
         </Wrapper>
     );
