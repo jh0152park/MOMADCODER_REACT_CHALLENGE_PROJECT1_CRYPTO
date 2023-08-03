@@ -62,6 +62,9 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
+  * {
+    box-sizing: border-box;
+  }
 `;
 
 const root = ReactDOM.createRoot(
