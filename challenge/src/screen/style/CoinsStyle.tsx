@@ -21,8 +21,8 @@ export const CoinList = styled.ul`
 `;
 
 export const Coin = styled.li`
-    width: 300px;
-    height: 50px;
+    width: 350px;
+    height: 70px;
     border-radius: 10px;
     border: 1px solid ${(props) => props.theme.accentColor};
     margin-bottom: 20px;
@@ -60,7 +60,7 @@ export const Logo = styled.img`
 `;
 
 export const CoinContainer = styled.div`
-    width: 280px;
+    width: 330px;
     height: 50px;
     display: flex;
     justify-content: flex-start;
