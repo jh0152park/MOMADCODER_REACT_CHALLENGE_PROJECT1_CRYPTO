@@ -33,7 +33,7 @@ function Coin() {
         getCoinDetail(coinId);
         getCoinPrice(coinId);
     }, []);
-
+    //sudden attack!
     return (
         <Wrapper>
             <Header>
