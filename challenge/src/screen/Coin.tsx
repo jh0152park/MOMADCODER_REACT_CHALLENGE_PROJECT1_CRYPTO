@@ -22,6 +22,8 @@ import {
 } from "./style/CoinStyle";
 import Price from "./Price";
 import Chart from "./Chart";
+import { useQuery } from "react-query";
+import { getCoinDetail, getCoinPrice } from "../API";
 
 const COIN_DETAIL_URL = "https://api.coinpaprika.com/v1/coins/";
 const COIN_PRICE_URL = "https://api.coinpaprika.com/v1/tickers/";
@@ -30,28 +32,19 @@ function Coin() {
     const { coinId } = useParams<{ coinId: string }>();
     const { state } = useLocation<IRouteState>();
 
-    const [loading, setLoading] = useState(true);
-    const [detail, setDetail] = useState<ICoinDetail>();
-    const [price, setPrice] = useState<ICoinPrice>();
+    const { data: detail, isLoading: detailLoading } = useQuery<ICoinDetail>(
+        "detail",
+        () => getCoinDetail(COIN_DETAIL_URL, coinId)
+    );
 
+    const { data: price, isLoading: priceLoading } = useQuery<ICoinPrice>(
+        "price",
+        () => getCoinPrice(COIN_PRICE_URL, coinId)
+    );
+
+    const loading = detailLoading || priceLoading;
     const isChartMatch = useRouteMatch("/" + coinId + "/chart");
     const isPriceMatch = useRouteMatch("/" + coinId + "/price");
-
-    async function getCoinDetail(coinId: string) {
-        const response = await axios.get(COIN_DETAIL_URL + coinId);
-        setDetail(response.data);
-    }
-
-    async function getCoinPrice(coinId: string) {
-        const response = await axios.get(COIN_PRICE_URL + coinId);
-        setPrice(response.data);
-    }
-
-    useEffect(() => {
-        getCoinDetail(coinId);
-        getCoinPrice(coinId);
-        setLoading(false);
-    }, [coinId]);
 
     return (
         <Wrapper>
