@@ -7,3 +7,7 @@ export interface ICoin {
     is_active: boolean;
     type: string;
 }
+
+export interface IRouteState {
+    name: string;
+}

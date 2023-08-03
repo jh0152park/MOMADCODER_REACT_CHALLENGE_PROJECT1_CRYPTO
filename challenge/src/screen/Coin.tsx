@@ -1,11 +1,28 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { Header, Loading, Title, Wrapper } from "./style/CoinsStyle";
+import { IRouteState } from "./types/CoinsType";
 
 function Coin() {
+    const [loading, setLoading] = useState(true);
     const { coinId } = useParams<{ coinId: string }>();
-    console.log(coinId);
+    const { state } = useLocation<IRouteState>();
 
-    return <h1>Coin</h1>;
+    useEffect(() => {
+        if (state) {
+            setLoading(false);
+        }
+    }, []);
+
+    return (
+        <Wrapper>
+            <Header>
+                <Title>{state?.name || "Not Exist"}</Title>
+            </Header>
+
+            {loading ? <Loading>Loading...</Loading> : null}
+        </Wrapper>
+    );
 }
 
 export default React.memo(Coin);
