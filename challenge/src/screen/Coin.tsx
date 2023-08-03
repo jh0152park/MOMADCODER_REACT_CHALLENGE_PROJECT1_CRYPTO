@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useLocation, useParams } from "react-router-dom";
+import { Link, Route, Switch, useLocation, useParams } from "react-router-dom";
 import { Header, Loading, Title, Wrapper } from "./style/CoinsStyle";
 import { IRouteState } from "./types/CoinsType";
 import axios from "axios";
@@ -91,12 +91,15 @@ function Coin() {
                         </Information>
                     </Container>
 
+                    <Link to={`/${coinId}/Chart`}>Chart</Link>
+                    <Link to={`/${coinId}/price`}>Price</Link>
+
                     <Switch>
-                        <Route path={`/${coinId}/price`}>
-                            <Price></Price>
-                        </Route>
                         <Route path={`/${coinId}/chart`}>
                             <Chart></Chart>
+                        </Route>
+                        <Route path={`/${coinId}/price`}>
+                            <Price></Price>
                         </Route>
                     </Switch>
                 </>
