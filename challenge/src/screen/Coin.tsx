@@ -33,12 +33,12 @@ function Coin() {
     const { state } = useLocation<IRouteState>();
 
     const { data: detail, isLoading: detailLoading } = useQuery<ICoinDetail>(
-        "detail",
+        ["detail", coinId],
         () => getCoinDetail(COIN_DETAIL_URL, coinId)
     );
 
     const { data: price, isLoading: priceLoading } = useQuery<ICoinPrice>(
-        "price",
+        ["price", coinId],
         () => getCoinPrice(COIN_PRICE_URL, coinId)
     );
 
