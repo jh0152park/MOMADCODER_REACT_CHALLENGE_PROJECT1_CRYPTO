@@ -13,23 +13,16 @@ import {
     Wrapper,
 } from "./style/CoinsStyle";
 import { ICoin } from "./types/CoinsType";
+import { useQuery } from "react-query";
+import { getCoinList } from "../API";
 
 const URL = "https://api.coinpaprika.com/v1/coins";
 const LOGO_URL = "https://coinicons-api.vercel.app/api/icon/";
 
 function Coins() {
-    const [coins, setCoins] = useState<ICoin[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    async function getCoinList() {
-        const response = await axios.get(URL);
-        setCoins(response.data.slice(0, 100));
-        setLoading(false);
-    }
-
-    useEffect(() => {
-        getCoinList();
-    }, []);
+    const { data: coins, isLoading: loading } = useQuery<ICoin[]>("coins", () =>
+        getCoinList(URL)
+    );
 
     return (
         <Wrapper>
@@ -41,7 +34,7 @@ function Coins() {
                 <Loading>Loading...</Loading>
             ) : (
                 <CoinList>
-                    {coins.map((coin) => (
+                    {coins?.map((coin) => (
                         <Coin key={coin.id}>
                             <Link
                                 to={{
