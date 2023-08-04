@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import { DarkMode, LightMode } from "./Thema";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Helmet } from "react-helmet";
 
 const GlobalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -75,6 +76,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <>
+        <Helmet>
+            <title>Crypto Coins</title>
+        </Helmet>
         <RecoilRoot>
             <QueryClientProvider client={queryClient}>
                 <ThemeProvider theme={DarkMode}>
