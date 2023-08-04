@@ -20,6 +20,7 @@ export const HeaderNavigation = styled.div`
     span {
         &:hover {
             cursor: pointer;
+            scale: 1.1;
         }
     }
 `;
