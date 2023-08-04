@@ -22,7 +22,7 @@ function Chart({ coinId }: { coinId: string }) {
                 <ApexChart
                     type="line"
                     width={500}
-                    height={300}
+                    height={350}
                     options={{
                         theme: {
                             mode: "dark",
@@ -52,6 +52,24 @@ function Chart({ coinId }: { coinId: string }) {
                             },
                             axisBorder: {
                                 show: true,
+                            },
+                            type: "datetime",
+                            categories: data?.map(
+                                // (history) => new Date(history.time_open)
+                                (history) => history.time_close
+                            ),
+                        },
+                        fill: {
+                            type: "gradient",
+                            gradient: {
+                                gradientToColors: ["blue"],
+                                stops: [0, 100],
+                            },
+                        },
+                        colors: ["yellow"],
+                        tooltip: {
+                            y: {
+                                formatter: (value) => `$ ${value.toFixed(2)}`,
                             },
                         },
                     }}
