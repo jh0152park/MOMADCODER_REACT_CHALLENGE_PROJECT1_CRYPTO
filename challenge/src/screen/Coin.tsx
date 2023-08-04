@@ -63,7 +63,7 @@ function Coin() {
             setThemaIcon("☾");
         } else {
             setCurrentThema("dark");
-            setThemaIcon("☀");
+            setThemaIcon("☼");
         }
     }
 
