@@ -39,7 +39,7 @@ function Coins() {
             setThemaIcon("☾");
         } else {
             setCurrentThema("dark");
-            setThemaIcon("☀");
+            setThemaIcon("☼");
         }
     }
 
