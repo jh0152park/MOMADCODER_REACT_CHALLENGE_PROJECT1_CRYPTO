@@ -56,6 +56,11 @@ export const Loading = styled.span`
     text-align: center;
     font-size: 20px;
     display: block;
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 `;
 
 export const Logo = styled.img`

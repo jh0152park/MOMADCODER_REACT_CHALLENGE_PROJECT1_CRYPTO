@@ -8,14 +8,14 @@ export const CurrentThema = atom({
 
 export const ThemaIcon = atom({
     key: "ThemaIcon",
-    default: "☀️",
+    default: "☼",
     /**
-     * Sun ☀️: Currently thema is dark
-     * Moon 🌙: Currently thema is light
+     * Sun ☀: Currently thema is dark
+     * Moon ☾: Currently thema is light
      */
 });
 
 export const HomeIcon = atom({
     key: "HomeIcon",
-    default: "🏠",
+    default: "←",
 });

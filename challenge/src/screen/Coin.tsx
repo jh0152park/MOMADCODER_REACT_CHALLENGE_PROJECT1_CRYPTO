@@ -26,7 +26,7 @@ import Chart from "./Chart";
 import { useQuery } from "react-query";
 import { getCoinDetail, getCoinPrice } from "../API";
 import { Helmet } from "react-helmet";
-import { HeaderNavigation } from "./style/CommonStyle";
+import { Back, HeaderNavigation, ThemaButton } from "./style/CommonStyle";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { CurrentThema, HomeIcon, ThemaIcon } from "../GlobalConfig";
 
@@ -60,23 +60,23 @@ function Coin() {
         console.log("clicked");
         if (currentThema === "dark") {
             setCurrentThema("light");
-            setThemaIcon("🌙");
+            setThemaIcon("☾");
         } else {
             setCurrentThema("dark");
-            setThemaIcon("☀️");
+            setThemaIcon("☀");
         }
     }
 
     return (
         <Wrapper>
             <HeaderNavigation>
-                <span
+                <Back
                     onClick={() => {
                         history.push("/");
                     }}
                 >
                     {homeIcon}
-                </span>
+                </Back>
                 <Title>
                     {state?.name
                         ? state?.name
@@ -84,7 +84,6 @@ function Coin() {
                         ? "Loading..."
                         : detail?.name}
                 </Title>
-                <span onClick={onThemaIconClick}>{themaIcon}</span>
             </HeaderNavigation>
 
             {loading ? (
@@ -163,6 +162,7 @@ function Coin() {
                     </GraphContainer>
                 </>
             )}
+            <ThemaButton onClick={onThemaIconClick}>{themaIcon}</ThemaButton>
         </Wrapper>
     );
 }
