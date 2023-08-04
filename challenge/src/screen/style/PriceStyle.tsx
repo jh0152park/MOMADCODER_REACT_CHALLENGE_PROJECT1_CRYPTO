@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 
 export const PriceBoard = styled.div`
     width: 450px;
-    margin-top: 25px;
+    margin-top: 15px;
     border-radius: 10px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);

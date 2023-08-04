@@ -116,7 +116,12 @@ function Coin() {
                                     </p>
                                 </SubItems>
                             </Board>
-                            <Description>{detail?.description}</Description>
+                            <Description>
+                                {typeof detail?.description === "string" &&
+                                detail?.description.length > 300
+                                    ? detail?.description.slice(0, 300) + "..."
+                                    : detail?.description}
+                            </Description>
                             <Board>
                                 <SubItems>
                                     <p>MAX SUPPLY</p>

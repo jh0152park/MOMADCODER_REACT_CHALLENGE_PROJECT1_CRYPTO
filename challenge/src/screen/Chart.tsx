@@ -30,7 +30,7 @@ function Chart({ coinId }: { coinId: string }) {
                 "Price data not found."
             ) : typeof data === "object" && data !== undefined ? (
                 <ApexChart
-                    type="line"
+                    type="candlestick"
                     width={500}
                     height={350}
                     options={{
@@ -65,29 +65,44 @@ function Chart({ coinId }: { coinId: string }) {
                             },
                             type: "datetime",
                             categories: data?.map(
-                                // (history) => new Date(history.time_open)
                                 (history) => history.time_close
                             ),
                         },
                         fill: {
-                            type: "gradient",
-                            gradient: {
-                                gradientToColors: ["blue"],
-                                stops: [0, 100],
-                            },
+                            // colors: undefined,
+                            // type: "gradient",
+                            // gradient: {
+                            //     gradientToColors: ["blue"],
+                            //     stops: [0, 100],
+                            // },
                         },
-                        colors: ["yellow"],
+                        // colors: ["yellow"],
                         tooltip: {
                             y: {
                                 formatter: (value) => `$ ${value.toFixed(2)}`,
                             },
                         },
+                        plotOptions: {
+                            candlestick: {
+                                colors: {
+                                    upward: "#ED003E",
+                                    downward: "#2FC257",
+                                },
+                            },
+                        },
                     }}
                     series={[
                         {
-                            data: data?.map((history) =>
-                                parseFloat(history.close)
-                            ) as number[],
+                            // data: data?.map((history) =>
+                            //     parseFloat(history.close)
+                            // ) as number[],
+                            data: data?.map((history) => [
+                                new Date(history.time_open).getTime(),
+                                history.open,
+                                history.high,
+                                history.low,
+                                history.close,
+                            ]) as [],
                             name: "price",
                         },
                     ]}
