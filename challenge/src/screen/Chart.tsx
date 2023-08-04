@@ -7,7 +7,7 @@ import ApexChart from "react-apexcharts";
 
 function Chart({ coinId }: { coinId: string }) {
     const isMatch = useRouteMatch("/" + coinId + "/chart");
-    const { data, isLoading } = useQuery<ICoinPriceHistroy>(
+    const { data, isLoading } = useQuery<ICoinPriceHistroy[]>(
         [coinId, "priceHistory"],
         () => getCoinPriceHistory(coinId)
     );
@@ -27,15 +27,40 @@ function Chart({ coinId }: { coinId: string }) {
                         theme: {
                             mode: "dark",
                         },
+                        stroke: {
+                            curve: "smooth",
+                            width: 3,
+                        },
+                        chart: {
+                            toolbar: {
+                                show: false,
+                            },
+                            background: "transparent",
+                        },
+                        grid: {
+                            show: false,
+                        },
+                        yaxis: {
+                            show: false,
+                        },
+                        xaxis: {
+                            labels: {
+                                show: false,
+                            },
+                            axisTicks: {
+                                show: false,
+                            },
+                            axisBorder: {
+                                show: true,
+                            },
+                        },
                     }}
                     series={[
                         {
-                            data: [1, 2, 3, 4, 5],
-                            name: "hello",
-                        },
-                        {
-                            data: [11, 21, 31, 41, 51],
-                            name: "world",
+                            data: data?.map((history) =>
+                                parseFloat(history.close)
+                            ) as number[],
+                            name: "price",
                         },
                     ]}
                 ></ApexChart>
