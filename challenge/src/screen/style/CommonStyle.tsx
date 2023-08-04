@@ -37,9 +37,10 @@ export const ThemaButton = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    border: 1px solid ${(props) => props.theme.accentColor};
     position: absolute;
-    left: 20px;
-    bottom: 20px;
+    left: 10px;
+    bottom: 10px;
     z-index: 99;
     display: flex;
     justify-content: center;
