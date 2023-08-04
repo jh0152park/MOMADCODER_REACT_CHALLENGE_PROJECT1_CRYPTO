@@ -22,5 +22,31 @@ export const HeaderNavigation = styled.div`
             cursor: pointer;
             scale: 1.1;
         }
+        font-size: 40px;
+    }
+`;
+
+export const Back = styled.span`
+    position: absolute;
+    left: 20px;
+`;
+
+export const ThemaButton = styled.div`
+    background-color: ${(props) => props.theme.boardColor};
+    color: ${(props) => props.theme.accentColor};
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    &:hover {
+        cursor: pointer;
+        scale: 1.1;
     }
 `;

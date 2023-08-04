@@ -16,7 +16,7 @@ import {
 import { ICoin } from "./types/CoinsType";
 import { useQuery } from "react-query";
 import { getCoinList } from "../API";
-import { HeaderNavigation } from "./style/CommonStyle";
+import { HeaderNavigation, ThemaButton } from "./style/CommonStyle";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { CurrentThema, HomeIcon, ThemaIcon } from "../GlobalConfig";
 
@@ -36,19 +36,17 @@ function Coins() {
         console.log("clicked");
         if (currentThema === "dark") {
             setCurrentThema("light");
-            setThemaIcon("🌙");
+            setThemaIcon("☾");
         } else {
             setCurrentThema("dark");
-            setThemaIcon("☀️");
+            setThemaIcon("☀");
         }
     }
 
     return (
         <Wrapper>
             <HeaderNavigation>
-                <span>{homeIcon}</span>
                 <Title>Crypto Coins</Title>
-                <span onClick={onThemaIconClick}>{themaIcon}</span>
             </HeaderNavigation>
 
             {loading ? (
@@ -78,6 +76,7 @@ function Coins() {
                     </CoinList>
                 </CoinListContainer>
             )}
+            <ThemaButton onClick={onThemaIconClick}>{themaIcon}</ThemaButton>
         </Wrapper>
     );
 }
