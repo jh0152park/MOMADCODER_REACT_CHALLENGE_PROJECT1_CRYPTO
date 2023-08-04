@@ -11,4 +11,13 @@ export interface ICoinPriceHistroy {
     close: string;
     volume: string;
     market_cap: number;
+    code: string;
+    message: string;
+    name: string;
 }
+
+// export interface ICoinPriceHistroyError {
+//     code: string;
+//     message: string;
+//     name: string;
+// }

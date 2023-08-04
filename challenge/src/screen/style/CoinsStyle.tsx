@@ -1,8 +1,6 @@
 import { styled } from "styled-components";
 
-export const Wrapper = styled.div`
-    padding: 0px 20px;
-`;
+export const Wrapper = styled.div``;
 
 export const Header = styled.header`
     height: 10vh;
@@ -12,6 +10,12 @@ export const Header = styled.header`
     font-size: 50px;
     font-weight: bold;
     margin-bottom: 20px;
+`;
+
+export const CoinListContainer = styled.div`
+    width: 100%;
+    position: absolute;
+    top: 120px;
 `;
 
 export const CoinList = styled.ul`

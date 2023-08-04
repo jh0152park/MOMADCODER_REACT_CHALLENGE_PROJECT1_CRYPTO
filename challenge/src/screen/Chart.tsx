@@ -4,21 +4,33 @@ import { getCoinPriceHistory } from "../API";
 import { ICoinPriceHistroy } from "./types/ChartType";
 import { Wrapper } from "./style/ChartStyle";
 import ApexChart from "react-apexcharts";
+import { useEffect, useState } from "react";
 
 function Chart({ coinId }: { coinId: string }) {
-    const isMatch = useRouteMatch("/" + coinId + "/chart");
     const { data, isLoading } = useQuery<ICoinPriceHistroy[]>(
         [coinId, "priceHistory"],
         () => getCoinPriceHistory(coinId)
     );
 
-    console.log(data);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        if (isLoading) {
+            if (data === "error") {
+                setError(true);
+            }
+        }
+    }, [data, isLoading]);
+
+    console.log(typeof data);
 
     return (
         <Wrapper>
             {isLoading ? (
                 "Loading the chart..."
-            ) : (
+            ) : error ? (
+                "Price data not found."
+            ) : typeof data === "object" && data !== undefined ? (
                 <ApexChart
                     type="line"
                     width={500}
@@ -82,6 +94,8 @@ function Chart({ coinId }: { coinId: string }) {
                         },
                     ]}
                 ></ApexChart>
+            ) : (
+                "Price data not found."
             )}
         </Wrapper>
     );

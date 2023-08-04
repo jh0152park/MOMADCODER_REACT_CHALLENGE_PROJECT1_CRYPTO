@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
     Link,
     Route,
@@ -9,12 +9,12 @@ import {
 } from "react-router-dom";
 import { Header, Loading, Title, Wrapper } from "./style/CoinsStyle";
 import { IRouteState } from "./types/CoinsType";
-import axios from "axios";
 import { ICoinDetail, ICoinPrice } from "./types/CoinType";
 import {
     Board,
     Container,
     Description,
+    GraphContainer,
     Information,
     SubItems,
     Tab,
@@ -25,6 +25,7 @@ import Chart from "./Chart";
 import { useQuery } from "react-query";
 import { getCoinDetail, getCoinPrice } from "../API";
 import { Helmet } from "react-helmet";
+import { HeaderNavigation } from "./style/CommonStyle";
 
 const COIN_DETAIL_URL = "https://api.coinpaprika.com/v1/coins/";
 const COIN_PRICE_URL = "https://api.coinpaprika.com/v1/tickers/";
@@ -49,7 +50,7 @@ function Coin() {
 
     return (
         <Wrapper>
-            <Header>
+            <HeaderNavigation>
                 <Title>
                     {state?.name
                         ? state?.name
@@ -57,7 +58,7 @@ function Coin() {
                         ? "Loading..."
                         : detail?.name}
                 </Title>
-            </Header>
+            </HeaderNavigation>
 
             {loading ? (
                 <>
@@ -123,14 +124,16 @@ function Coin() {
                         </Information>
                     </Container>
 
-                    <Switch>
-                        <Route path={`/${coinId}/chart`}>
-                            <Chart coinId={coinId}></Chart>
-                        </Route>
-                        <Route path={`/${coinId}/price`}>
-                            <Price coinId={coinId}></Price>
-                        </Route>
-                    </Switch>
+                    <GraphContainer>
+                        <Switch>
+                            <Route path={`/${coinId}/chart`}>
+                                <Chart coinId={coinId}></Chart>
+                            </Route>
+                            <Route path={`/${coinId}/price`}>
+                                <Price coinId={coinId}></Price>
+                            </Route>
+                        </Switch>
+                    </GraphContainer>
                 </>
             )}
         </Wrapper>
