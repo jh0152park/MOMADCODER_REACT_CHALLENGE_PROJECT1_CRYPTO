@@ -16,7 +16,11 @@ export async function getCoinPrice(URL: string, coinId: string) {
 }
 
 export async function getCoinPriceHistory(coinId: string) {
-    const URL = `https://ohlcv-api.nomadcoders.workers.dev/?coinId=${coinId}`;
-    const response = await axios.get(URL);
-    return response.data;
+    try {
+        const URL = `https://ohlcv-api.nomadcoders.workers.dev/?coinId=${coinId}`;
+        const response = await axios.get(URL);
+        return response.data;
+    } catch (ex) {
+        return "error";
+    }
 }

@@ -6,6 +6,7 @@ import {
     Coin,
     CoinContainer,
     CoinList,
+    CoinListContainer,
     Header,
     Loading,
     Logo,
@@ -15,6 +16,7 @@ import {
 import { ICoin } from "./types/CoinsType";
 import { useQuery } from "react-query";
 import { getCoinList } from "../API";
+import { HeaderNavigation } from "./style/CommonStyle";
 
 const URL = "https://api.coinpaprika.com/v1/coins";
 const LOGO_URL = "https://coinicons-api.vercel.app/api/icon/";
@@ -26,34 +28,36 @@ function Coins() {
 
     return (
         <Wrapper>
-            <Header>
+            <HeaderNavigation>
                 <Title>Crypto Coins</Title>
-            </Header>
+            </HeaderNavigation>
 
             {loading ? (
                 <Loading>Loading...</Loading>
             ) : (
-                <CoinList>
-                    {coins?.map((coin) => (
-                        <Coin key={coin.id}>
-                            <Link
-                                to={{
-                                    pathname: `/${coin.id}`,
-                                    state: {
-                                        name: coin.name,
-                                    },
-                                }}
-                            >
-                                <CoinContainer>
-                                    <Logo
-                                        src={`${LOGO_URL}${coin.symbol.toLowerCase()}`}
-                                    ></Logo>
-                                    {coin.name}
-                                </CoinContainer>
-                            </Link>
-                        </Coin>
-                    ))}
-                </CoinList>
+                <CoinListContainer>
+                    <CoinList>
+                        {coins?.map((coin) => (
+                            <Coin key={coin.id}>
+                                <Link
+                                    to={{
+                                        pathname: `/${coin.id}`,
+                                        state: {
+                                            name: coin.name,
+                                        },
+                                    }}
+                                >
+                                    <CoinContainer>
+                                        <Logo
+                                            src={`${LOGO_URL}${coin.symbol.toLowerCase()}`}
+                                        ></Logo>
+                                        {coin.name}
+                                    </CoinContainer>
+                                </Link>
+                            </Coin>
+                        ))}
+                    </CoinList>
+                </CoinListContainer>
             )}
         </Wrapper>
     );

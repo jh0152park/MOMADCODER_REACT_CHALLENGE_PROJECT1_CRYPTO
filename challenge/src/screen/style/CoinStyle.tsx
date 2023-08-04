@@ -4,10 +4,15 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 130px;
+    margin: 0 auto;
 `;
 
 export const Information = styled.div`
-    width: 700px;
+    width: 450px;
     overflow: hidden;
     box-sizing: border-box;
     /* background-color: whitesmoke; */
@@ -64,4 +69,12 @@ export const Tab = styled.div<{ isActive: boolean }>`
             transition: color 0.2s ease-out;
         }
     }
+`;
+
+export const GraphContainer = styled.div`
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    margin-top: 100px;
 `;
