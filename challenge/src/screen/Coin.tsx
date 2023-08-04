@@ -3,6 +3,7 @@ import {
     Link,
     Route,
     Switch,
+    useHistory,
     useLocation,
     useParams,
     useRouteMatch,
@@ -26,6 +27,8 @@ import { useQuery } from "react-query";
 import { getCoinDetail, getCoinPrice } from "../API";
 import { Helmet } from "react-helmet";
 import { HeaderNavigation } from "./style/CommonStyle";
+import { useRecoilValue } from "recoil";
+import { HomeIcon, ThemaIcon } from "../GlobalConfig";
 
 const COIN_DETAIL_URL = "https://api.coinpaprika.com/v1/coins/";
 const COIN_PRICE_URL = "https://api.coinpaprika.com/v1/tickers/";
@@ -48,9 +51,20 @@ function Coin() {
     const isChartMatch = useRouteMatch("/" + coinId + "/chart");
     const isPriceMatch = useRouteMatch("/" + coinId + "/price");
 
+    const history = useHistory();
+    const homeIcon = useRecoilValue(HomeIcon);
+    const themaIcon = useRecoilValue(ThemaIcon);
+
     return (
         <Wrapper>
             <HeaderNavigation>
+                <span
+                    onClick={() => {
+                        history.push("/");
+                    }}
+                >
+                    {homeIcon}
+                </span>
                 <Title>
                     {state?.name
                         ? state?.name
@@ -58,6 +72,7 @@ function Coin() {
                         ? "Loading..."
                         : detail?.name}
                 </Title>
+                <span>{themaIcon}</span>
             </HeaderNavigation>
 
             {loading ? (

@@ -12,4 +12,15 @@ export const HeaderNavigation = styled.div`
     z-index: 99;
     position: fixed;
     border-bottom: 1px solid ${(props) => props.theme.accentColor};
+
+    h1 {
+        margin: 0px 20px;
+    }
+
+    span {
+        &:hover {
+            cursor: pointer;
+            scale: 1.1;
+        }
+    }
 `;
