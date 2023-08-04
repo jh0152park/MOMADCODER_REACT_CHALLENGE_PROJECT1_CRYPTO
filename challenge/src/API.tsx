@@ -14,3 +14,9 @@ export async function getCoinPrice(URL: string, coinId: string) {
     const response = await axios.get(URL + coinId);
     return response.data;
 }
+
+export async function getCoinPriceHistory(coinId: string) {
+    const URL = `https://ohlcv-api.nomadcoders.workers.dev/?coinId=${coinId}`;
+    const response = await axios.get(URL);
+    return response.data;
+}
