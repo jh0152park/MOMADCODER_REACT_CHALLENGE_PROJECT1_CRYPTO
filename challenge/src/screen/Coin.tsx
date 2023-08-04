@@ -24,6 +24,7 @@ import Price from "./Price";
 import Chart from "./Chart";
 import { useQuery } from "react-query";
 import { getCoinDetail, getCoinPrice } from "../API";
+import { Helmet } from "react-helmet";
 
 const COIN_DETAIL_URL = "https://api.coinpaprika.com/v1/coins/";
 const COIN_PRICE_URL = "https://api.coinpaprika.com/v1/tickers/";
@@ -59,9 +60,17 @@ function Coin() {
             </Header>
 
             {loading ? (
-                <Loading>Loading...</Loading>
+                <>
+                    <Helmet>
+                        <title>Loading...</title>
+                    </Helmet>
+                    <Loading>Loading...</Loading>
+                </>
             ) : (
                 <>
+                    <Helmet>
+                        <title>{state?.name}</title>
+                    </Helmet>
                     <Container>
                         <Information>
                             <Board>
@@ -74,8 +83,10 @@ function Coin() {
                                     <p>{detail?.symbol}</p>
                                 </SubItems>
                                 <SubItems>
-                                    <p>TYPE</p>
-                                    <p>{detail?.type}</p>
+                                    <p>PRICE</p>
+                                    <p>
+                                        $ {price?.quotes.USD.price.toFixed(2)}
+                                    </p>
                                 </SubItems>
                             </Board>
                             <Description>{detail?.description}</Description>
