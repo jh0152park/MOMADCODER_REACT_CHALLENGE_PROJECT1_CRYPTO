@@ -17,6 +17,8 @@ import { ICoin } from "./types/CoinsType";
 import { useQuery } from "react-query";
 import { getCoinList } from "../API";
 import { HeaderNavigation } from "./style/CommonStyle";
+import { useRecoilValue } from "recoil";
+import { HomeIcon, ThemaIcon } from "../GlobalConfig";
 
 const URL = "https://api.coinpaprika.com/v1/coins";
 const LOGO_URL = "https://coinicons-api.vercel.app/api/icon/";
@@ -26,10 +28,15 @@ function Coins() {
         getCoinList(URL)
     );
 
+    const homeIcon = useRecoilValue(HomeIcon);
+    const themaIcon = useRecoilValue(ThemaIcon);
+
     return (
         <Wrapper>
             <HeaderNavigation>
+                <span>{homeIcon}</span>
                 <Title>Crypto Coins</Title>
+                <span>{themaIcon}</span>
             </HeaderNavigation>
 
             {loading ? (
