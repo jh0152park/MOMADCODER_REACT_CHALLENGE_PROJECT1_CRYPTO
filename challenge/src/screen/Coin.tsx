@@ -27,8 +27,8 @@ import { useQuery } from "react-query";
 import { getCoinDetail, getCoinPrice } from "../API";
 import { Helmet } from "react-helmet";
 import { HeaderNavigation } from "./style/CommonStyle";
-import { useRecoilValue } from "recoil";
-import { HomeIcon, ThemaIcon } from "../GlobalConfig";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { CurrentThema, HomeIcon, ThemaIcon } from "../GlobalConfig";
 
 const COIN_DETAIL_URL = "https://api.coinpaprika.com/v1/coins/";
 const COIN_PRICE_URL = "https://api.coinpaprika.com/v1/tickers/";
@@ -53,7 +53,19 @@ function Coin() {
 
     const history = useHistory();
     const homeIcon = useRecoilValue(HomeIcon);
-    const themaIcon = useRecoilValue(ThemaIcon);
+    const [themaIcon, setThemaIcon] = useRecoilState(ThemaIcon);
+    const [currentThema, setCurrentThema] = useRecoilState(CurrentThema);
+
+    function onThemaIconClick() {
+        console.log("clicked");
+        if (currentThema === "dark") {
+            setCurrentThema("light");
+            setThemaIcon("🌙");
+        } else {
+            setCurrentThema("dark");
+            setThemaIcon("☀️");
+        }
+    }
 
     return (
         <Wrapper>
@@ -72,7 +84,7 @@ function Coin() {
                         ? "Loading..."
                         : detail?.name}
                 </Title>
-                <span>{themaIcon}</span>
+                <span onClick={onThemaIconClick}>{themaIcon}</span>
             </HeaderNavigation>
 
             {loading ? (
