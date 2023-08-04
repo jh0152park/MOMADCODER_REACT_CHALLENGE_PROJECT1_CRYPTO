@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { atom } from "recoil";
+import { atom, useRecoilState, useSetRecoilState } from "recoil";
 
 export const CurrentThema = atom({
     key: "CurrentThema",

@@ -17,8 +17,8 @@ import { ICoin } from "./types/CoinsType";
 import { useQuery } from "react-query";
 import { getCoinList } from "../API";
 import { HeaderNavigation } from "./style/CommonStyle";
-import { useRecoilValue } from "recoil";
-import { HomeIcon, ThemaIcon } from "../GlobalConfig";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { CurrentThema, HomeIcon, ThemaIcon } from "../GlobalConfig";
 
 const URL = "https://api.coinpaprika.com/v1/coins";
 const LOGO_URL = "https://coinicons-api.vercel.app/api/icon/";
@@ -29,14 +29,26 @@ function Coins() {
     );
 
     const homeIcon = useRecoilValue(HomeIcon);
-    const themaIcon = useRecoilValue(ThemaIcon);
+    const [themaIcon, setThemaIcon] = useRecoilState(ThemaIcon);
+    const [currentThema, setCurrentThema] = useRecoilState(CurrentThema);
+
+    function onThemaIconClick() {
+        console.log("clicked");
+        if (currentThema === "dark") {
+            setCurrentThema("light");
+            setThemaIcon("🌙");
+        } else {
+            setCurrentThema("dark");
+            setThemaIcon("☀️");
+        }
+    }
 
     return (
         <Wrapper>
             <HeaderNavigation>
                 <span>{homeIcon}</span>
                 <Title>Crypto Coins</Title>
-                <span>{themaIcon}</span>
+                <span onClick={onThemaIconClick}>{themaIcon}</span>
             </HeaderNavigation>
 
             {loading ? (
