@@ -22,8 +22,6 @@ function Chart({ coinId }: { coinId: string }) {
         }
     }, [data, isLoading]);
 
-    console.log(typeof data);
-
     return (
         <Wrapper>
             {isLoading ? (

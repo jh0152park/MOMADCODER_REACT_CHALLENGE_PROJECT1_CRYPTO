@@ -156,7 +156,7 @@ function Coin() {
                                 <Chart coinId={coinId}></Chart>
                             </Route>
                             <Route path={`/${coinId}/price`}>
-                                <Price coinId={coinId}></Price>
+                                {price ? <Price data={price}></Price> : null}
                             </Route>
                         </Switch>
                     </GraphContainer>
